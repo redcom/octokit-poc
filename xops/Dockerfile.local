@@ -1,0 +1,13 @@
+FROM node:alpine
+LABEL APP ops-backend
+
+ADD package.json /tmp/package.json
+RUN  cd /tmp && yarn install --silent --network-concurrency 80
+RUN mkdir -p /app && cp -a /tmp/node_modules /app/
+
+WORKDIR /app
+ADD . .
+ENV PORT 3002
+
+EXPOSE ${PORT}
+CMD yarn debug

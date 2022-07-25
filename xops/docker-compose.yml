@@ -1,0 +1,29 @@
+version: "3"
+services:
+  xops:
+    container_name: xops
+    image: xops
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    env_file: .env
+    ports:
+      - 3003:3003
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+  postgres:
+    container_name: xops-db
+    image: postgres:14.2-alpine
+    restart: always
+    ports:
+      - 15432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    env_file: .env
+volumes:
+  db-data: {}
+  node_modules: {}

@@ -1,0 +1,11 @@
+{
+    "watch": [
+        "src"
+    ],
+    "ext": "*",
+    "ignore": [
+        "src/test/**/*.spec.ts",
+        "src/test/**/*.ts"
+    ],
+    "exec": "yarn db:migrate:dev && yarn dev"
+}
